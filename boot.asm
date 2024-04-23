@@ -1,38 +1,58 @@
 [BITS 16]
 [ORG 0x7C00]
 
+; Coloca e printa de uma em uma Character no registrador AL
 call HelloWorld
-call JumpLine  
+call JumpLine
 
+; Lê uma String
+call JumpLine
 call PointerString
 call PrintString
 
+; Lê do buffer oque o usuario digita
 call PointerBuffer
 call ReadString
 call PointerStringBuf
 call PrintString
+call Teste
+call Teste
+
+jmp $
+
+Teste:
+    mov ah, 0eh
+    mov al, 0ah
+    int 10h
+    mov al, 0dh
+    int 10h
+    mov al, 43h
+    int 10h
+    ret
 
 HelloWorld:
     mov ah, 0eh
-    mov al, 48h
+    mov al, 48h ; 48h -> 'H'
     int 10h
-    mov al, 65h
+    mov al, 65h ; 65h -> 'e'
     int 10h
-    mov al, 6ch
+    mov al, 6ch ; 6ch -> 'l'
     int 10h
-    mov al, 6ch
+    mov al, 6ch ; 6ch -> 'l'
     int 10h
-    mov al, 20h
+    mov al, 6fh ; 6fh -> 'o'
     int 10h
-    mov al, 57h
+    mov al, 20h ; 20h -> ' '
     int 10h
-    mov al, 6fh
+    mov al, 57h ; 57h -> 'W'
     int 10h
-    mov al, 72h
+    mov al, 6fh ; 6fh -> 'o'
     int 10h
-    mov al, 6ch
+    mov al, 72h ; 72h -> 'r'
     int 10h
-    mov al, 64h
+    mov al, 6ch ; 6ch -> 'l'
+    int 10h
+    mov al, 64h ; 64h -> 'd'
     int 10h
     ret
 
@@ -63,8 +83,9 @@ PrintString:
         int 10h
         inc si
         mov al, [si]
-        cmp al, 0
+        cmp al, 00h   
         jne print
+        jp Teste
     ret
 
 ReadString:
