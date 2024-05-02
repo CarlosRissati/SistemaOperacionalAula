@@ -13,6 +13,7 @@ OSMain:
     call ConfigSegment
     call ConfigStack
     call TEXT.SetVideoMode
+    call BackColor
     jmp ShowString
 
 ShowString:
@@ -21,6 +22,8 @@ ShowString:
     call MoveCursor
     mov si, Welcome
     call PrintString
+    mov ah, 00
+    int 16h
     jmp END
 
 ConfigSegment:
@@ -42,11 +45,21 @@ TEXT.SetVideoMode:
     mov BYTE[BackHeight], 20
 ret
 
+BackColor:
+    mov ah, 06h
+    mov al, 0
+    mov bh, 0001_1111b
+    mov ch, 0
+    mov cl, 0
+    mov dh, 5
+    mov dl, 80
+    int 10h
+ret
+
 PrintString:
     mov ah, 09h
     mov bh, [Pagination]
-    mov bl, 40
-    
+    mov bl, 0111_1001b
     mov cx, 1
     mov al, [si]
     print:
@@ -67,4 +80,4 @@ MoveCursor:
 ret
 
 END:
-    jmp $
+    int 19h
