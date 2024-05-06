@@ -116,7 +116,7 @@ EffectInit:
         mov bx, [Count]
         inc bx
         mov WORD[Count], bx
-        cmp bx, 5000
+        cmp bx, 10
         jne ReturnLoop
         jmp ReturnProg
     ReturnLoop:
@@ -129,11 +129,10 @@ ret
 
 Waiting:
     pusha
-    mov bx, 0
-    time:
-        inc bx
-        cmp bx, 50000
-        jne time
+    mov ah, 86h
+    mov cx, 0002h ;Tempo = cx:dx -> 249F0 -> 150ms
+    mov dx, 049F0h
+    int 15h
     popa
 ret
 
