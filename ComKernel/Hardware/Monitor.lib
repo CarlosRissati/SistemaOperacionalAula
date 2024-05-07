@@ -130,8 +130,8 @@ ret
 Waiting:
     pusha
     mov ah, 86h
-    mov cx, 0002h ;Tempo = cx:dx -> 249F0 -> 150ms
-    mov dx, 049F0h
+    mov cx, 0000h ;Tempo = cx:dx -> 249F0 -> 150ms (3E8 -> 1ms)
+    mov dx, 03E8h ;quando o numero ocupa o primeiro bit, deve colocar zero na frente para aceitar
     int 15h
     popa
 ret

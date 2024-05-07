@@ -12,14 +12,20 @@
 %DEFINE Window_Height       3003h
 %DEFINE Window_PositionX    3005h
 %DEFINE Window_PositionY    3007h
-%DEFINE Window_Bar_Color    300Ah
+%DEFINE Window_Bar_Color    3009h
+%DEFINE Window_Border_Color 300Ah
 %DEFINE Window_Back_Color   300Bh
 %DEFINE ButtonClose         300Ch
 %DEFINE ButtonMaximize      300Dh
 %DEFINE ButtonMinimize      300Eh
+%DEFINE Window_Border       300Fh
+%DEFINE Window_Border_Right 3010h
+%DEFINE Window_Border_Left  3011h
+%DEFINE Window_Border_Up    3012h
+%DEFINE Window_Border_Down  3013h
 
-M_InitialPositionX dw 0000h
-M_InitialPositionY dw 0000h
+BackInitialPositionX dw 0000h
+BackInitialPositionY dw 0000h
 StateWindowBar dw 0000h
 SavePositionX dw 0000h
 SavePositionY dw 0000h

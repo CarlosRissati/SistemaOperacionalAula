@@ -5,8 +5,8 @@ jmp OSMain
 
 ; Includes
 
-%INCLUDE "Hardware/Monitor.lib"
 %INCLUDE "Hardware/wmemory.lib"
+%INCLUDE "Hardware/Monitor.lib"
 %INCLUDE "Hardware/disk.lib"
 
 ; Iniciando o sistema
@@ -22,12 +22,36 @@ OSMain:
 ; ---------------------------------
 ; Funções do Kernel
 GraficInterface:
-    mov byte[Sector], 3
+    mov byte[Window_Bar], 1
+    mov word[Window_PositionX], 5
+    mov word[Window_PositionY], 5
+    mov word[Window_Width], 100
+    mov word[Window_Height], 100
+    mov byte[Window_Border_Color], 21
+    mov byte[Window_Bar_Color], 16
+    mov byte[Window_Back_Color], 55
+    mov byte[ButtonClose], 1
+    mov byte[ButtonMaximize], 1
+    mov byte[ButtonMinimize], 1
+    mov byte[Sector], 5
     mov byte[Drive], 80h ;primeiro disco de boot, 81 é o segundo disco
-    mov byte[NumSectors], 1
+    mov byte[NumSectors], 2
     mov word[SegmentAddr], 0800h
     mov word[OffsetAddr], 0500h
     call ReadDisk
+    call WindowAddress
+    mov byte[Window_Bar], 0
+    mov word[Window_PositionX], 20
+    mov word[Window_PositionY], 20
+    mov word[Window_Width], 65
+    mov word[Window_Height], 65
+    mov byte[Window_Border_Color], 21
+    mov byte[Window_Back_Color], 55
+    mov byte[Window_Border], 1
+    mov byte[Window_Border_Right], 29
+    mov byte[Window_Border_Down], 29
+    mov byte[Window_Border_Left], 0
+    mov byte[Window_Border_Up], 0
     call WindowAddress
 ret
 
